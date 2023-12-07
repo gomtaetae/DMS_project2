@@ -4,22 +4,7 @@ import numpy as np
 import time
 import facial_tracking.conf as conf
 
-
 class FaceMesh:
-    """
-    Face mesh of a given frame using mediapipe.
-
-    Args:
-        max_num_faces (int): maximum number of faces to detect
-        refine_landmarks (bool): whether to further refine the landmark coordinates around the eyes and lips,
-            and output additional landmarks around the irises by applying the Attention Mesh Model.
-        min_detection_confidence (float): minimum confidence value ([0.0, 1.0]) from the face detection
-            model for the detection to be considered successful.
-        min_tracking_confidence (float): minimum confidence value ([0.0, 1.0]) from the landmark-tracking model
-            for the face landmarks to be considered tracked successfully, or otherwise face detection will be
-            invoked automatically on the next input image. 
-    """
-
     def __init__(self, max_num_faces=1, refine_landmarks=True,
                  min_detection_confidence=0.5, min_tracking_confidence=0.5):
 
@@ -49,7 +34,7 @@ class FaceMesh:
         self.landmark_right_eye  = np.unique(np.array(list(self.mp_face_mesh.FACEMESH_RIGHT_EYE)))
         self.landmark_left_iris  = np.unique(np.array(list(self.mp_face_mesh.FACEMESH_LEFT_IRIS)))
         self.landmark_right_iris = np.unique(np.array(list(self.mp_face_mesh.FACEMESH_RIGHT_IRIS)))
-        self.landmark_lips       = np.unique(np.array(list(self.mp_face_mesh.FACEMESH_LIPS)))
+
         
     def process_frame(self, frame):
         """The function to mesh the frame."""
@@ -91,22 +76,22 @@ class FaceMesh:
                     .get_default_face_mesh_tesselation_style())
                 
                 # Draw the contours of face, eyes, eyebrows, and lips
-                self.mp_drawing.draw_landmarks(
-                    image=self.frame,
-                    landmark_list=face_landmarks,
-                    connections=self.mp_face_mesh.FACEMESH_CONTOURS,
-                    landmark_drawing_spec=None,
-                    connection_drawing_spec=self.mp_drawing_styles
-                    .get_default_face_mesh_contours_style())
-                
+                # self.mp_drawing.draw_landmarks(
+                #     image=self.frame,
+                #     landmark_list=face_landmarks,
+                #     connections=self.mp_face_mesh.FACEMESH_CONTOURS,
+                #     landmark_drawing_spec=None,
+                #     connection_drawing_spec=self.mp_drawing_styles
+                #     .get_default_face_mesh_contours_style())
+                #
                 # Draw the contours of irises
-                self.mp_drawing.draw_landmarks(
-                    image=self.frame,
-                    landmark_list=face_landmarks,
-                    connections=self.mp_face_mesh.FACEMESH_IRISES,
-                    landmark_drawing_spec=None,
-                    connection_drawing_spec=self.mp_drawing_styles
-                    .get_default_face_mesh_iris_connections_style())
+                # self.mp_drawing.draw_landmarks(
+                #     image=self.frame,
+                #     landmark_list=face_landmarks,
+                #     connections=self.mp_face_mesh.FACEMESH_IRISES,
+                #     landmark_drawing_spec=None,
+                #     connection_drawing_spec=self.mp_drawing_styles
+                #     .get_default_face_mesh_iris_connections_style())
     
     def draw_mesh_eyes(self):
         """Draw the mesh of eyes."""

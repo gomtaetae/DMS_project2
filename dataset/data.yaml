@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['awake', 'drowsy', 'phone', 'smoking']
+
+roboflow:
+  workspace: ai-e1r2s
+  project: -seatbelt
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/ai-e1r2s/-seatbelt/dataset/1

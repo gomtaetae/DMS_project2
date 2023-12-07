@@ -7,15 +7,6 @@ from facial_tracking.iris import Iris
 
 
 class Eye:
-    """
-    The object of eye, computing its features from face landmarks.
-
-    Args:
-        frame (numpy,ndarray): the input frame
-        face_landmarks (mediapipe face landmarks object): contains the face landmarks coordinates
-        id (list of int): the indices of eye in the landmarks
-    """
-
     def __init__(self, frame, face_landmarks, id):
 
         self.frame = frame
